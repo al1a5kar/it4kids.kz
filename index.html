@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIRLS Мультитренажёр - 9 режимов с регистрацией</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New&family=Georgia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Форма авторизации -->
+    <section id="auth-section" class="game-section active">
+        <div class="auth-container">
+            <h1><i class="fas fa-graduation-cap"></i> PIRLS Мультитренажёр</h1>
+            <p style="margin-bottom: 30px; color: #666;">Войдите или зарегистрируйтесь для доступа ко всем режимам</p>
+            
+            <div id="login-form" class="auth-form active">
+                <h2>Вход</h2>
+                <input type="text" id="login-username" class="auth-input" placeholder="Имя пользователя" required>
+                <input type="password" id="login-password" class="auth-input" placeholder="Пароль" required>
+                <button class="action-btn" id="login-btn" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+                <div class="auth-switch" id="switch-to-register">Нет аккаунта? Зарегистрируйтесь</div>
+            </div>
+            
+            <div id="register-form" class="auth-form">
+                <h2>Регистрация</h2>
+                <input type="text" id="register-username" class="auth-input" placeholder="Имя пользователя" required>
+                <input type="password" id="register-password" class="auth-input" placeholder="Пароль" required>
+                <input type="password" id="register-confirm" class="auth-input" placeholder="Подтвердите пароль" required>
+                <button class="action-btn secondary" id="register-btn" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+                <div class="auth-switch" id="switch-to-login">Уже есть аккаунт? Войти</div>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                <p style="font-size: 0.9rem; color: #666;">
+                    <i class="fas fa-info-circle"></i> После регистрации вы получите доступ ко всем 9 режимам обучения
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Главное меню -->
+    <div class="container">
+        <section id="main-menu" class="game-section">
+            <header class="game-header">
+                <div class="user-info">
+                    <div class="user-name" id="current-username">Пользователь</div>
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    </button>
+                </div>
+                
+                <h1><i class="fas fa-graduation-cap"></i> PIRLS Мультитренажёр</h1>
+                <p class="subtitle">9 уникальных режимов для развития навыков чтения и не только</p>
+                
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalPoints">0</div>
+                        <div class="stat-label">Баллов заработано</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="gamesPlayed">0</div>
+                        <div class="stat-label">Режимов пройдено</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="readingSpeed">0</div>
+                        <div class="stat-label">Скорость чтения</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="typingSpeed">0</div>
+                        <div class="stat-label">Скорость печати</div>
+                    </div>
+                </div>
+                
+                <button class="action-btn" id="showStatsBtn">
+                    <i class="fas fa-chart-bar"></i> Подробная статистика
+                </button>
+                <button class="action-btn danger" id="resetStatsBtn">
+                    <i class="fas fa-trash"></i> Сбросить статистику
+                </button>
+            </header>
+
+            <div class="modes-grid">
+                <!-- Режим 1 -->
+                <div class="mode-card" data-game="1">
+                    <div class="mode-difficulty">Легко</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Линейное чтение</h3>
+                    <p>Анализ рассказа "Цветы на крыше" с вопросами PIRLS. Отработка базовых стратегий понимания текста.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">PIRLS</span>
+                        <span class="mode-tag">Анализ</span>
+                        <span class="mode-tag">Литература</span>
+                    </div>
+                </div>
+
+                <!-- Режим 2 -->
+                <div class="mode-card" data-game="2">
+                    <div class="mode-difficulty">Средне</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Цифровое чтение</h3>
+                    <p>Гипертекст "Тайна океана". Навигация, оценка источников, сбор информации из нескольких документов.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">ePIRLS</span>
+                        <span class="mode-tag">Навигация</span>
+                        <span class="mode-tag">Критическое мышление</span>
+                    </div>
+                </div>
+
+                <!-- Режим 3: Тренажёр печатания -->
+                <div class="mode-card" data-game="3">
+                    <div class="mode-difficulty">Средне</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3>Клавиатурный тренажёр</h3>
+                    <p>Учитесь печатать быстро и без ошибок. 100+ предложений, статистика скорости и точности.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Печать</span>
+                        <span class="mode-tag">Скорость</span>
+                        <span class="mode-tag">Точность</span>
+                    </div>
+                </div>
+
+                <!-- Режим 4: Исторические тексты -->
+                <div class="mode-card" data-game="4">
+                    <div class="mode-difficulty">Средне</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Исторические тексты</h3>
+                    <p>50 исторических фактов из истории Казахстана. Работа с документами разных эпох, анализ, датировка, понимание контекста.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">История</span>
+                        <span class="mode-tag">Казахстан</span>
+                        <span class="mode-tag">Контекст</span>
+                    </div>
+                </div>
+
+                <!-- Режим 5: Научный текст -->
+                <div class="mode-card" data-game="5">
+                    <div class="mode-difficulty">Сложно</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Научный текст</h3>
+                    <p>50 научных статей с терминами. Понимание схем, графиков, научного метода, анализ данных.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Наука</span>
+                        <span class="mode-tag">Термины</span>
+                        <span class="mode-tag">Анализ данных</span>
+                    </div>
+                </div>
+
+                <!-- Режим 6: Поэзия -->
+                <div class="mode-card" data-game="6">
+                    <div class="mode-difficulty">Легко</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Поэзия и рифмы</h3>
+                    <p>50 стихотворений русских поэтов. Анализ поэтических текстов, понимание метафор, ритма, эмоций.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Поэзия</span>
+                        <span class="mode-tag">Рифмы</span>
+                        <span class="mode-tag">Эмоции</span>
+                    </div>
+                </div>
+
+                <!-- Режим 7: Иностранный язык -->
+                <div class="mode-card" data-game="7">
+                    <div class="mode-difficulty">Средне</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Иностранный язык</h3>
+                    <p>50 английских предложений с переводом. Чтение текстов на английском, понимание через контекст.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Английский</span>
+                        <span class="mode-tag">Перевод</span>
+                        <span class="mode-tag">Контекст</span>
+                    </div>
+                </div>
+
+                <!-- Режим 8: Текст с пропусками -->
+                <div class="mode-card" data-game="8">
+                    <div class="mode-difficulty">Средне</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Текст с пропусками</h3>
+                    <p>50 предложений с пропущенными словами. Восстановление текста по смыслу, развитие языковой догадки.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Заполнение</span>
+                        <span class="mode-tag">Контекст</span>
+                        <span class="mode-tag">Грамматика</span>
+                    </div>
+                </div>
+
+                <!-- Режим 9: Тест скорости чтения -->
+                <div class="mode-card" data-game="9">
+                    <div class="mode-difficulty">Легко</div>
+                    <div class="mode-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Тест скорости чтения</h3>
+                    <p>50 текстов разной сложности. Обратный таймер, измерение скорости с пониманием, вопросы на проверку.</p>
+                    <div class="mode-tags">
+                        <span class="mode-tag">Скорость</span>
+                        <span class="mode-tag">Понимание</span>
+                        <span class="mode-tag">Таймер</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-footer">
+                <p>Тренажёр разработан на основе принципов PIRLS для всестороннего развития навыков чтения</p>
+                <p class="copyright">© 2026 Образовательный мультитренажёр для PIRLS| Сапарбай Әлиасқар | город Жетысай</p>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 1: ЦВЕТЫ НА КРЫШЕ ===== -->
+        <section id="game-1" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="story-container">
+                <div class="story-header">
+                    <h1><i class="fas fa-home"></i> Цветы на крыше</h1>
+                    <p>Линейное чтение и анализ текста PIRLS - 50 разных текстов</p>
+                </div>
+                
+                <div class="story-content" id="storyContent1">
+                    <!-- Контент будет загружен динамически -->
+                </div>
+                
+                <div class="questions-panel">
+                    <h3><i class="fas fa-question-circle"></i> Вопросы для анализа</h3>
+                    <div id="questions1">
+                        <!-- Вопросы будут загружены динамически -->
+                    </div>
+                    
+                    <button class="action-btn check-answers-btn" data-game="1">
+                        <i class="fas fa-check"></i> Проверить ответы
+                    </button>
+                    <button class="action-btn secondary" id="nextStoryBtn">
+                        <i class="fas fa-forward"></i> Следующий текст
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 2: ОКЕАНЫ ===== -->
+        <section id="game-2" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="story-header">
+                    <h1><i class="fas fa-water"></i> Тайна океана</h1>
+                    <p>Гипертекстовое исследование в стиле ePIRLS - 50 разных фактов</p>
+                </div>
+                
+                <div class="ocean-nav">
+                    <div class="nav-card" data-page="intro">
+                        <i class="fas fa-info-circle"></i>
+                        <h4>Введение</h4>
+                    </div>
+                    <div class="nav-card" data-page="problem">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Проблема</h4>
+                    </div>
+                    <div class="nav-card" data-page="research">
+                        <i class="fas fa-search"></i>
+                        <h4>Исследование</h4>
+                    </div>
+                    <div class="nav-card" data-page="sources">
+                        <i class="fas fa-newspaper"></i>
+                        <h4>Источники</h4>
+                    </div>
+                    <div class="nav-card" data-page="conclusion">
+                        <i class="fas fa-flag-checkered"></i>
+                        <h4>Выводы</h4>
+                    </div>
+                </div>
+                
+                <div class="ocean-content" id="oceanContent">
+                    <!-- Контент будет загружен динамически -->
+                </div>
+                
+                <div style="text-align: center; margin: 20px;">
+                    <button class="action-btn" id="nextOceanFactBtn">
+                        <i class="fas fa-forward"></i> Следующий факт
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 3: КЛАВИАТУРНЫЙ ТРЕНАЖЁР ===== -->
+        <section id="game-3" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="typing-container">
+                <div class="typing-header">
+                    <h1><i class="fas fa-keyboard"></i> Клавиатурный тренажёр</h1>
+                    <p>Тренируйте скорость и точность печати на текстах PIRLS</p>
+                </div>
+                
+                <div class="typing-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="wpm">0</div>
+                        <div class="stat-label">слов/минуту</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="accuracy">100%</div>
+                        <div class="stat-label">точность</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="timeLeft">60</div>
+                        <div class="stat-label">секунд</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="charsTyped">0</div>
+                        <div class="stat-label">символов</div>
+                    </div>
+                </div>
+                
+                <div class="typing-text" id="typingText">
+                    <!-- Текст будет загружен динамически -->
+                </div>
+                
+                <input type="text" class="typing-input" id="typingInput" placeholder="Начинайте печатать здесь..." autocomplete="off">
+                
+                <div style="text-align: center;">
+                    <button class="action-btn start-typing-btn">
+                        <i class="fas fa-play"></i> Начать тест (60 секунд)
+                    </button>
+                    <button class="action-btn secondary reset-typing-btn">
+                        <i class="fas fa-redo"></i> Сбросить
+                    </button>
+                </div>
+                
+                <div class="keyboard" id="keyboard">
+                    <!-- Клавиатура будет создана через JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 4: ИСТОРИЧЕСКИЕ ТЕКСТЫ ===== -->
+        <section id="game-4" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div style="max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px;">
+                <div class="story-header">
+                    <h1><i class="fas fa-landmark"></i> История Казахстана</h1>
+                    <p>50 исторических фактов о Казахстане для анализа и изучения</p>
+                </div>
+                
+                <div class="event-content" id="historicalFacts">
+                    <!-- Факты будут загружены динамически -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="action-btn" id="loadMoreFactsBtn">
+                        <i class="fas fa-sync-alt"></i> Загрузить другие факты
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 5: НАУЧНЫЙ ТЕКСТ ===== -->
+        <section id="game-5" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="scientific-text" id="scientificArticles">
+                <!-- Статьи будут загружены динамически -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px;">
+                <button class="action-btn" id="loadMoreArticlesBtn">
+                    <i class="fas fa-sync-alt"></i> Загрузить другую статью
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 6: ПОЭЗИЯ ===== -->
+        <section id="game-6" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="poetry-container" id="poetryContainer">
+                <!-- Стихи будут загружены динамически -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px;">
+                <button class="action-btn" id="loadNewPoemBtn">
+                    <i class="fas fa-sync-alt"></i> Загрузить другое стихотворение
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 7: ИНОСТРАННЫЙ ЯЗЫК ===== -->
+        <section id="game-7" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="language-exercise" id="languageExercise">
+                <!-- Предложения будут загружены динамически -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px;">
+                <button class="action-btn" id="loadNewSentenceBtn">
+                    <i class="fas fa-sync-alt"></i> Следующее предложение
+                </button>
+                <button class="action-btn secondary" id="checkTranslationBtn">
+                    <i class="fas fa-check"></i> Проверить перевод
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 8: ТЕКСТ С ПРОПУСКАМИ ===== -->
+        <section id="game-8" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="gap-text" id="gapText">
+                <!-- Предложения с пропусками будут загружены динамически -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px;">
+                <button class="action-btn" id="loadNewGapSentenceBtn">
+                    <i class="fas fa-sync-alt"></i> Следующее предложение
+                </button>
+                <button class="action-btn secondary" id="checkGapsBtn">
+                    <i class="fas fa-check"></i> Проверить заполнение
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== РЕЖИМ 9: ТЕСТ СКОРОСТИ ЧТЕНИЯ ===== -->
+        <section id="game-9" class="game-section">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+            
+            <div class="speed-reading">
+                <div class="story-header">
+                    <h1><i class="fas fa-tachometer-alt"></i> Тест скорости чтения</h1>
+                    <p>Читайте текст, таймер покажет время. После окончания введите количество прочитанных слов.</p>
+                </div>
+                
+                <div class="speed-controls">
+                    <button class="speed-btn" data-speed="150">150 слов/мин</button>
+                    <button class="speed-btn active" data-speed="200">200 слов/мин</button>
+                    <button class="speed-btn" data-speed="250">250 слов/мин</button>
+                </div>
+                
+                <div class="countdown-timer" id="countdownTimer">01:00</div>
+                
+                <div class="speed-text" id="speedText">
+                    <!-- Текст будет загружен динамически -->
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="action-btn" id="startReadingBtn">
+                        <i class="fas fa-play"></i> Начать тест (60 секунд)
+                    </button>
+                    <button class="action-btn secondary" id="finishReadingBtn">
+                        <i class="fas fa-flag-checkered"></i> Закончить и проверить
+                    </button>
+                </div>
+                
+                <div class="typing-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="readingSpeedValue">0</div>
+                        <div class="stat-label">слов/минуту</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="wordsRead">0</div>
+                        <div class="stat-label">слов прочитано</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="timeSpent">0</div>
+                        <div class="stat-label">секунд потрачено</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="comprehensionScore">0%</div>
+                        <div class="stat-label">понимание</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Модальное окно статистики -->
+    <div class="modal" id="statsModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeStatsModal">×</button>
+            <h2><i class="fas fa-chart-bar"></i> Ваша статистика</h2>
+            
+            <div class="stats-details" id="statsDetails">
+                <!-- Статистика будет загружена динамически -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
