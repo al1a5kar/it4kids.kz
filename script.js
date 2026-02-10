@@ -249,7 +249,7 @@ function updateSessionTimeDisplay() {
     
     // Также отображаем в заголовке вкладки
     const userName = currentUser || 'Гость';
-    document.title = `Мультитренажёр (${timeString}) | ${userName}`;
+    document.title = `IT4Kids (${timeString}) | ${userName}`;
 }
 
 // Сохранение времени сессии
